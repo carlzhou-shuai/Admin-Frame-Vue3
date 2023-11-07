@@ -1,33 +1,73 @@
 <template>
   <div class="resource">
     <el-card shadow="never" :body-style="{ padding: '30px 10px 15px 10px' }">
-      <el-form ref="baseInfoRef" :inline="true" :model="state.queryParams" class="demo-form-inline"
-        label-position="right" label-width="84px">
+      <el-form
+        ref="baseInfoRef"
+        :inline="true"
+        :model="state.queryParams"
+        class="demo-form-inline"
+        label-position="right"
+        label-width="84px"
+      >
         <el-form-item>
-          <el-input v-model.trim="state.queryParams.resourceName" clearable placeholder="请输入资源名称"
-            @keyup.enter="getResourceList">
+          <el-input
+            v-model.trim="state.queryParams.resourceName"
+            clearable
+            placeholder="请输入资源名称"
+            @keyup.enter="getResourceList"
+          >
           </el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" plain @click="getResourceList">查询</el-button>
-          <el-button type="primary" plain @click="handlePopup(null, 'add')">新增</el-button>
+          <el-button type="primary" plain @click="getResourceList"
+            >查询</el-button
+          >
+          <el-button type="primary" plain @click="handlePopup(null, 'add')"
+            >新增</el-button
+          >
         </el-form-item>
       </el-form>
     </el-card>
-    <el-card shadow="never" :body-style="{ padding: '30px 10px 15px 10px' }" class="m-t8">
+    <el-card
+      shadow="never"
+      :body-style="{ padding: '30px 10px 15px 10px' }"
+      class="m-t8"
+    >
       <el-row>
         <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
-          <el-tree :data="state.resourceList" :expand-on-click-node="false" :props="state.defaultProps"
-            default-expand-all node-key="resourceId">
+          <el-tree
+            :data="state.resourceList"
+            :expand-on-click-node="false"
+            :props="state.defaultProps"
+            default-expand-all
+            node-key="resourceId"
+          >
             <template #default="{ node, data }">
               <span class="custom-tree-node">
                 <span>{{ node.label }}</span>
                 <span>
                   <el-space spacer="|">
-                    <el-button link type="primary" @click="handlePopup(data, 'add')" :underline="false">添加</el-button>
-                    <el-button link type="primary" @click="handlePopup(data, 'modify')" :underline="false">编辑
+                    <el-button
+                      link
+                      type="primary"
+                      @click="handlePopup(data, 'add')"
+                      :underline="false"
+                      >添加</el-button
+                    >
+                    <el-button
+                      link
+                      type="primary"
+                      @click="handlePopup(data, 'modify')"
+                      :underline="false"
+                      >编辑
                     </el-button>
-                    <el-button link type="danger" @click="delDataById(data)" :underline="false">删除</el-button>
+                    <el-button
+                      link
+                      type="danger"
+                      @click="delDataById(data)"
+                      :underline="false"
+                      >删除</el-button
+                    >
                   </el-space>
                 </span>
               </span>
@@ -36,22 +76,37 @@
         </el-col>
       </el-row>
     </el-card>
-    <el-dialog v-model="showDistribution" :before-handle-close="
-      () => {
-        handleClose(resourceFormRef);
-      }
-    " title="资源配置" width="865px">
-      <el-form hide-required-asterisk ref="resourceFormRef" :model="state.resourceForm" :rules="state.resourceRules"
-        class="demo-ruleForm" label-width="84px">
+    <el-dialog
+      v-model="showDistribution"
+      :before-handle-close="
+        () => {
+          handleClose(resourceFormRef);
+        }
+      "
+      title="资源配置"
+      width="865px"
+    >
+      <el-form
+        hide-required-asterisk
+        ref="resourceFormRef"
+        :model="state.resourceForm"
+        :rules="state.resourceRules"
+        class="demo-ruleForm"
+        label-width="84px"
+      >
         <el-row>
           <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
             <el-form-item label="资源名称：" prop="resourceName">
-              <el-input v-model.trim="state.resourceForm.resourceName"></el-input>
+              <el-input
+                v-model.trim="state.resourceForm.resourceName"
+              ></el-input>
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
             <el-form-item label="资源路径：" prop="resourceUrl">
-              <el-input v-model.trim="state.resourceForm.resourceUrl"></el-input>
+              <el-input
+                v-model.trim="state.resourceForm.resourceUrl"
+              ></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="24">
@@ -61,12 +116,19 @@
           </el-col>
           <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
             <el-form-item label="资源权重：" prop="resourceOrder">
-              <el-input-number v-model="state.resourceForm.resourceOrder" :max="999" :min="1"></el-input-number>
+              <el-input-number
+                v-model="state.resourceForm.resourceOrder"
+                :max="999"
+                :min="1"
+              ></el-input-number>
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
             <el-form-item label="资源类型：" prop="resourceType">
-              <el-select v-model="state.resourceForm.resourceType" placeholder="请选择资源类型">
+              <el-select
+                v-model="state.resourceForm.resourceType"
+                placeholder="请选择资源类型"
+              >
                 <el-option label="菜单" value="1"></el-option>
                 <el-option label="url" value="2"></el-option>
               </el-select>
@@ -74,16 +136,22 @@
           </el-col>
           <el-col :span="24">
             <el-form-item label="说明：" prop="marks">
-              <el-input v-model="state.resourceForm.marks" :rows="2" placeholder="请输入说明" type="textarea"></el-input>
+              <el-input
+                v-model="state.resourceForm.marks"
+                :rows="2"
+                placeholder="请输入说明"
+                type="textarea"
+              ></el-input>
             </el-form-item>
           </el-col>
         </el-row>
-
       </el-form>
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="handleClose(resourceFormRef)">取 消</el-button>
-          <el-button type="primary" @click="onSubmit(resourceFormRef)">确 定</el-button>
+          <el-button type="primary" @click="onSubmit(resourceFormRef)"
+            >确 定</el-button
+          >
         </span>
       </template>
     </el-dialog>
@@ -131,7 +199,7 @@ const state = reactive({
 
 onMounted(() => {
   getResourceList();
-})
+});
 
 const getResourceList = () => {
   //查询列表
@@ -140,9 +208,9 @@ const getResourceList = () => {
     v.children = v.children.map((vChild: any) => {
       vChild.name = transitionLocal(vChild.resourceName);
       return vChild;
-    })
+    });
     return v;
-  })
+  });
 };
 
 const onSubmit = (formEl: FormInstance | undefined) => {
@@ -164,7 +232,7 @@ const toSaveThe = async (formEl: FormInstance | undefined) => {
       getResourceList();
     }
   });
-}
+};
 
 const toModify = async (formEl: FormInstance | undefined) => {
   //编辑
@@ -177,7 +245,7 @@ const toModify = async (formEl: FormInstance | undefined) => {
       getResourceList();
     }
   });
-}
+};
 
 const delDataById = (data: any) => {
   //删除
@@ -189,8 +257,8 @@ const delDataById = (data: any) => {
     .then(() => {
       getResourceList();
     })
-    .catch(() => { });
-}
+    .catch(() => {});
+};
 
 const handleClose = (formEl: FormInstance | undefined) => {
   //关闭
@@ -199,7 +267,7 @@ const handleClose = (formEl: FormInstance | undefined) => {
   }
   formEl.resetFields();
   showDistribution.value = false;
-}
+};
 
 const handlePopup = (
   data: {
@@ -230,7 +298,7 @@ const handlePopup = (
   }
   showDistribution.value = true;
   state.resourceForm = Object.assign(state.resourceForm, { data });
-}
+};
 </script>
 <style lang="scss" scoped>
 .resource {

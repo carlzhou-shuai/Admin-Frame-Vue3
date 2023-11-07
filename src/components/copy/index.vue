@@ -1,27 +1,39 @@
 <template>
-    <el-card class="box-card">
-      <template #header>
-        <div class="card-header">
-          <span>指令复制</span>
-        </div>
-      </template>
-      <div class="text item">
-        <el-button v-copy="'copydir'" text type="primary" class="copydir" data-clipboard-text="我是指令复制">我是指令复制(点击复制)
-        </el-button>
+  <el-card class="box-card">
+    <template #header>
+      <div class="card-header">
+        <span>指令复制</span>
       </div>
-    </el-card>
+    </template>
+    <div class="text item">
+      <el-button
+        v-copy="'copydir'"
+        text
+        type="primary"
+        class="copydir"
+        data-clipboard-text="我是指令复制"
+        >我是指令复制(点击复制)
+      </el-button>
+    </div>
+  </el-card>
 
-    <el-card class="box-card m-t8" >
-      <template #header>
-        <div class="card-header">
-          <span>组件内方法复制</span>
-        </div>
-      </template>
-      <div class="text item">
-        <el-button text type="primary" class="copyBtn" data-clipboard-text="我是组件内方法复制" @click="copy">我是组件内方法复制(点击复制)
-        </el-button>
+  <el-card class="box-card m-t8">
+    <template #header>
+      <div class="card-header">
+        <span>组件内方法复制</span>
       </div>
-    </el-card>
+    </template>
+    <div class="text item">
+      <el-button
+        text
+        type="primary"
+        class="copyBtn"
+        data-clipboard-text="我是组件内方法复制"
+        @click="copy"
+        >我是组件内方法复制(点击复制)
+      </el-button>
+    </div>
+  </el-card>
 </template>
 <script setup lang="ts" name="AdminCopy">
 import Clipboard from "clipboard";
@@ -35,12 +47,12 @@ const copy = () => {
     });
     // 释放内存
     clipboard.destroy();
-  })
+  });
   clipboard.on("error", (e) => {
     // 不支持复制
     //console.log('该浏览器不支持自动复制')
     // 释放内存
     clipboard.destroy();
-  })
-}
+  });
+};
 </script>

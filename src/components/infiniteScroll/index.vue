@@ -1,9 +1,7 @@
 <template>
   <el-card shadow="never" :body-style="{ padding: '30px' }">
     <template #header>
-      <div class="card-header">
-        无限滚动列表
-      </div>
+      <div class="card-header">无限滚动列表</div>
     </template>
     <ul v-infinite-scroll="load" class="infinite-list" style="overflow: auto">
       <li v-for="i in count" :key="i" class="infinite-list-item">
@@ -18,7 +16,7 @@ import { ref } from "vue";
 const count = ref(0);
 const load = () => {
   count.value += 1;
-}
+};
 </script>
 
 <style>
@@ -39,7 +37,7 @@ const load = () => {
   color: var(--el-color-primary);
 }
 
-.infinite-list .infinite-list-item+.list-item {
+.infinite-list .infinite-list-item + .list-item {
   margin-top: 10px;
 }
 </style>

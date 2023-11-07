@@ -34,7 +34,7 @@ const setWatermark = (str: string) => {
     "url(" + canvas.toDataURL("image/png") + ") left top repeat";
   document.body.appendChild(div);
   return id;
-}
+};
 // 该方法只允许调用一次
 // 添加水印的方法
 export const setWaterMarker = (str: string) => {

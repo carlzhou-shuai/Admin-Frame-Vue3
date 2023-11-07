@@ -34,7 +34,7 @@ const en: any = {
       name: "Dashboard",
       children: {
         analysis: "Analysis",
-        workbench: "Workbench"
+        workbench: "Workbench",
       },
     },
     function: {
@@ -100,9 +100,9 @@ const en: any = {
     i18n: {
       name: "Internationalization",
     },
-    other:{
-      name:"Other"
-    }
+    other: {
+      name: "Other",
+    },
   },
 };
 export default en;

@@ -1,10 +1,8 @@
 <template>
-   <el-card shadow="never" :body-style="{ padding: '30px' }">
-      <template #header>
-        <div class="card-header">
-          异常提示
-        </div>
-      </template>
+  <el-card shadow="never" :body-style="{ padding: '30px' }">
+    <template #header>
+      <div class="card-header">异常提示</div>
+    </template>
     <el-result icon="warning" title="提交异常">
       <template #extra>
         <div class="bg-default p-default min-w600">
@@ -21,6 +19,6 @@
         </div>
       </template>
     </el-result>
-  </el-card>  
+  </el-card>
 </template>
 <script lang="ts" setup name="AdminWarning"></script>

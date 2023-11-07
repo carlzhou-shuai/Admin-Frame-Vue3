@@ -17,7 +17,7 @@ const messages = {
 };
 export const i18n = createI18n({
   locale: Cookies.get("lang") || "zh",
-  legacy:false,
+  legacy: false,
   globalInjection: true,
   fallbackLocale: "zh",
   messages,

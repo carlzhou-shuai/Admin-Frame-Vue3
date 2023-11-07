@@ -1,12 +1,10 @@
 <template>
-   <el-card shadow="never" :body-style="{ padding: '30px' }">
-      <template #header>
-        <div class="card-header">
-          新手引导
-        </div>
-      </template>
+  <el-card shadow="never" :body-style="{ padding: '30px' }">
+    <template #header>
+      <div class="card-header">新手引导</div>
+    </template>
     <el-button type="primary" @click="toGuide">进入新手引导</el-button>
-   </el-card>
+  </el-card>
 </template>
 <script lang="ts" setup name="AdminNoviceGuide">
 import Driver from "driver.js";
@@ -30,5 +28,5 @@ const toGuide = () => {
   //开始新手引导
   driver.defineSteps(steps);
   driver.start();
-}
+};
 </script>

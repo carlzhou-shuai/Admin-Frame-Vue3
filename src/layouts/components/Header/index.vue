@@ -1,18 +1,42 @@
 <template>
-  <div :class="configStore.appConfig.showTabBar ? 'header-wrapper' : 'header-wrapper borderBottom'">
+  <div
+    :class="
+      configStore.appConfig.showTabBar
+        ? 'header-wrapper'
+        : 'header-wrapper borderBottom'
+    "
+  >
     <div class="collapse-left">
       <div class="collapse-btn-group">
-        <i v-if="configStore.appConfig.showFoldButton" title="点击打开关闭菜单" @click="switchCollapse"
-          :class="collapse ? 'fa fabtn fa-indent' : 'fa fabtn fa-dedent'"></i>
-        <i v-if="configStore.appConfig.showReFresh" title="刷新页面" @click="reload()" class="fa fa-refresh"
-          aria-hidden="true"></i>
+        <i
+          v-if="configStore.appConfig.showFoldButton"
+          title="点击打开关闭菜单"
+          @click="switchCollapse"
+          :class="collapse ? 'fa fabtn fa-indent' : 'fa fabtn fa-dedent'"
+        ></i>
+        <i
+          v-if="configStore.appConfig.showReFresh"
+          title="刷新页面"
+          @click="reload()"
+          class="fa fa-refresh"
+          aria-hidden="true"
+        ></i>
       </div>
-      <div class="collapse-breadcrumb" v-if="configStore.appConfig.showBreadcrumb">
+      <div
+        class="collapse-breadcrumb"
+        v-if="configStore.appConfig.showBreadcrumb"
+      >
         <el-breadcrumb>
-          <el-breadcrumb-item v-for="(item, index) in  route.matched" :key="item.path">
-            <span :style="{
-              'font-weight': route.matched.length === index + 1 ? 700 : 500
-            }">{{ transitionLocal("message." + item.meta.title) }}</span>
+          <el-breadcrumb-item
+            v-for="(item, index) in route.matched"
+            :key="item.path"
+          >
+            <span
+              :style="{
+                'font-weight': route.matched.length === index + 1 ? 700 : 500,
+              }"
+              >{{ transitionLocal("message." + item.meta.title) }}</span
+            >
           </el-breadcrumb-item>
         </el-breadcrumb>
       </div>
@@ -28,19 +52,32 @@
 
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item v-for="locale in $i18n.availableLocales" :key="`locale-${locale}`" :command="locale"
+            <el-dropdown-item
+              v-for="locale in $i18n.availableLocales"
+              :key="`locale-${locale}`"
+              :command="locale"
               :style="{
                 color: $i18n.locale == locale ? 'rgb(64, 158, 255)' : '',
-              }">{{ $filters.inspectLanguage(locale) }}</el-dropdown-item>
+              }"
+              >{{ $filters.inspectLanguage(locale) }}</el-dropdown-item
+            >
           </el-dropdown-menu>
         </template>
       </el-dropdown>
-      <span class="faSpan" @click="toGetMessage" v-if="configStore.appConfig.showMessage">
+      <span
+        class="faSpan"
+        @click="toGetMessage"
+        v-if="configStore.appConfig.showMessage"
+      >
         <el-badge is-dot class="item">
           <i class="fa faPad fa-bell-o"></i>
         </el-badge>
       </span>
-      <span class="faSpan" @click="configVisible = true" v-if="configStore.appConfig.showConfigMenu">
+      <span
+        class="faSpan"
+        @click="configVisible = true"
+        v-if="configStore.appConfig.showConfigMenu"
+      >
         <i class="fa faPad fa-cogs"></i>
       </span>
       <!-- 用户名下拉菜单 -->
@@ -54,16 +91,16 @@
         <template #dropdown>
           <el-dropdown-menu>
             <el-dropdown-item command="signOut">{{
-                t("message.public.loggedOut")
+              t("message.public.loggedOut")
             }}</el-dropdown-item>
             <el-dropdown-item command="versionLog">{{
-                t("message.public.versionLog")
+              t("message.public.versionLog")
             }}</el-dropdown-item>
             <el-dropdown-item command="baseInfo">{{
-                t("message.public.basicInfo")
+              t("message.public.basicInfo")
             }}</el-dropdown-item>
             <el-dropdown-item command="checkPass">{{
-                t("message.public.changePassword")
+              t("message.public.changePassword")
             }}</el-dropdown-item>
           </el-dropdown-menu>
         </template>
@@ -80,13 +117,7 @@
   </div>
 </template>
 <script setup lang="ts" name="AdminHeader">
-import {
-  getCurrentInstance,
-  ref,
-  computed,
-  unref,
-  inject
-} from "vue";
+import { getCurrentInstance, ref, computed, unref, inject } from "vue";
 import $filters from "@/filters/index";
 import screenFull from "screenfull";
 import { ArrowDown } from "@element-plus/icons-vue";
@@ -116,10 +147,10 @@ const router = useRouter(); //路由
 const baseInfoRef = ref();
 const collapse = computed(() => tagStore.collapse); //打开关闭sidebar
 const username = computed(() => userStore?.user?.username || "待完善"); //用户名
-let passVisible = ref<boolean>(false);  //修改密码弹框
-let baseVisible = ref<boolean>(false);  //基本信息弹框
-let versionVisible = ref<boolean>(false);  //版本日志弹框
-let configVisible = ref<boolean>(false);  //应用配置弹框
+let passVisible = ref<boolean>(false); //修改密码弹框
+let baseVisible = ref<boolean>(false); //基本信息弹框
+let versionVisible = ref<boolean>(false); //版本日志弹框
+let configVisible = ref<boolean>(false); //应用配置弹框
 const reload = inject("reload") as Function;
 const requestFullScreen = () => {
   //进入全屏 退出全屏
@@ -138,8 +169,8 @@ const requestFullScreen = () => {
 const switchCollapse = () => {
   //菜单栏展开关闭
   tagStore.$patch({
-    collapse: !unref(collapse)
-  })
+    collapse: !unref(collapse),
+  });
 };
 
 const handleCommand = <T extends string>(command: T) => {
@@ -154,7 +185,7 @@ const handleCommand = <T extends string>(command: T) => {
     passVisible.value = true;
   } else if (command === "baseInfo") {
     //打开基本信息弹框
-    unref(baseInfoRef).openBaseInfo()
+    unref(baseInfoRef).openBaseInfo();
   } else if (command === "versionLog") {
     //打开版本日志弹框
     versionVisible.value = true;
@@ -176,8 +207,8 @@ const changeI18n = <T extends string>(type: T) => {
   Cookies.set("lang", type); //存储国际化
   language.value = type; //更新i18n配置
   configStore.$patch({
-    language: type
-  })
+    language: type,
+  });
   proxy.$i18n.locale = type; //更新i18n配置
   ElMessage.success(`${t("message.public.editLang")}`);
 };

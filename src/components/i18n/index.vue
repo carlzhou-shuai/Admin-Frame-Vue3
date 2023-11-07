@@ -1,16 +1,22 @@
 <template>
   <div>
-      <el-card class="box-card" >
-        <template #header>
-          <div class="card-header">
-            <span>{{ t("message.introduce.i18n") }}</span>
-          </div>
-        </template>
-        <div class="text item">
-          <el-radio v-for="locale in $i18n.availableLocales" :key="`locale-${locale}`" v-model="state.chooseI18n"
-            :label="locale" @change="changLang">{{ $filters.inspectLanguage(locale) }}</el-radio>
+    <el-card class="box-card">
+      <template #header>
+        <div class="card-header">
+          <span>{{ t("message.introduce.i18n") }}</span>
         </div>
-      </el-card>
+      </template>
+      <div class="text item">
+        <el-radio
+          v-for="locale in $i18n.availableLocales"
+          :key="`locale-${locale}`"
+          v-model="state.chooseI18n"
+          :label="locale"
+          @change="changLang"
+          >{{ $filters.inspectLanguage(locale) }}</el-radio
+        >
+      </div>
+    </el-card>
   </div>
 </template>
 <script setup lang="ts" name="AdminI18n">
@@ -36,15 +42,15 @@ watch(
 const getDefaultLang = () => {
   //获取本地默认语言
   state.chooseI18n = language.value;
-}
+};
 
 const changLang = (lang: any) => {
   Cookies.set("lang", lang); //存储国际化
   language.value = lang; //更新i18n配置
   configStore.$patch({
-    language: lang
-  })
-}
+    language: lang,
+  });
+};
 
 getDefaultLang();
 </script>

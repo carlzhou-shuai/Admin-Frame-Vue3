@@ -1,9 +1,7 @@
 <template>
   <el-card shadow="never" :body-style="{ padding: '30px' }">
     <template #header>
-      <div class="card-header">
-        错误提示
-      </div>
+      <div class="card-header">错误提示</div>
     </template>
     <el-result icon="error" title="提交失败">
       <template #extra>

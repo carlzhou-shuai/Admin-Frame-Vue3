@@ -1,11 +1,18 @@
 <template>
   <div class="tag-wrapper borderBottom">
     <TransitionGroup v-if="tagsList.length" name="list" class="tags" tag="div">
-      <el-tag v-for="(tag, index) in tagsList" :key="index" :type="selectPath === tag.path ? '' : 'info'"
+      <el-tag
+        v-for="(tag, index) in tagsList"
+        :key="index"
+        :type="selectPath === tag.path ? '' : 'info'"
         :class="selectPath === tag.path ? 'tag-check' : 'tag-null-check'"
         :closable="tag.path == '/dashboard/workbench' ? false : true"
-        :effect="selectPath === tag.path ? 'dark' : 'plain'" :disable-transitions="false" @close="closeTag(index)"
-        @click="triggerTag(tag, 'go')" size="large">
+        :effect="selectPath === tag.path ? 'dark' : 'plain'"
+        :disable-transitions="false"
+        @close="closeTag(index)"
+        @click="triggerTag(tag, 'go')"
+        size="large"
+      >
         {{ t("message." + tag.title) }}
       </el-tag>
     </TransitionGroup>
@@ -27,7 +34,8 @@
             <el-dropdown-item command="all" :disabled="tagsList.length === 1">
               <span>{{ t("message.public.closeAll") }}</span>
             </el-dropdown-item>
-            <el-dropdown-item command="other" :disabled="tagsList.length <= 2">{{ t("message.public.closeOther") }}
+            <el-dropdown-item command="other" :disabled="tagsList.length <= 2"
+              >{{ t("message.public.closeOther") }}
             </el-dropdown-item>
           </el-dropdown-menu>
         </template>
@@ -45,13 +53,10 @@ import {
   toRaw,
   unref,
   isProxy,
-  watch
+  watch,
 } from "vue";
 import { FullScreen } from "@element-plus/icons-vue";
-import {
-  useRoute,
-  useRouter,
-} from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { ElMessage, ElNotification } from "element-plus";
 import { useI18n } from "vue-i18n";
 import { useTagStore } from "@/pinia/modules/tag";
@@ -86,20 +91,20 @@ const setTags = <T extends Tag>(target: T) => {
       tagStore.delTags({ index });
     }
 
-
     tagStore.setTags({
       title: target.meta.title,
       ...target,
     });
   }
-
 };
-
 
 const closeTag = <K extends number>(index: K) => {
   //关闭标签
   tagStore.delTags({ index });
-  triggerTag(unref(tagsList)[unref(tagsList).length === index ? index - 1 : index], "go");
+  triggerTag(
+    unref(tagsList)[unref(tagsList).length === index ? index - 1 : index],
+    "go"
+  );
 };
 
 const triggerTag = <T extends Tag, K extends string>(tag: T, type?: K) => {
@@ -152,8 +157,6 @@ const toFullScreen = () => {
   }
 };
 
-
-
 router.beforeEach(async (to, from) => {
   //监听路由变动
   if (!tagStore.BLACK_LIST.includes(to.path)) {
@@ -161,7 +164,6 @@ router.beforeEach(async (to, from) => {
     await triggerTag(to);
   }
 });
-
 
 onMounted(() => {
   //监听路由变动

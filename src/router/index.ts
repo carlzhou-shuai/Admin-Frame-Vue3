@@ -33,7 +33,7 @@ const routes: Array<RouteRecordRaw> = [
           title: "resource.dashboard.children.workbench",
         },
         component: () => import("@/components/dashboard/workbench.vue"),
-      }
+      },
     ],
   },
   {
@@ -271,7 +271,7 @@ const routes: Array<RouteRecordRaw> = [
 ];
 
 const router = createRouter({
-  history: createWebHashHistory('/'),
+  history: createWebHashHistory("/"),
   routes,
   scrollBehavior(to, from, savedPosition) {
     // 始终滚动到顶部

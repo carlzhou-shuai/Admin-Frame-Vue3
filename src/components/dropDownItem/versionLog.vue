@@ -1,13 +1,22 @@
 <template>
-  <el-dialog :before-close="close" :model-value="versionVisible" :title="`版本日志（${siteName} 版权所有）`" width="900px">
+  <el-dialog
+    :before-close="close"
+    :model-value="versionVisible"
+    :title="`版本日志（${siteName} 版权所有）`"
+    width="900px"
+  >
     <ul class="v-log-content">
       <li v-for="(item, index) in versionInfo" :key="item.version">
         <div class="v-log-nav df-c">
           <div class="df-c">
             <el-tag v-if="!index" effect="dark" size="small">NEW</el-tag>
-            <span class="v-n-title" :style="{
-              paddingLeft: index ? '50px' : '4px',
-            }">{{ item.version }}</span>
+            <span
+              class="v-n-title"
+              :style="{
+                paddingLeft: index ? '50px' : '4px',
+              }"
+              >{{ item.version }}</span
+            >
           </div>
           <span class="v-n-date">{{ item.releaseDate }}</span>
         </div>
@@ -20,7 +29,7 @@
     </ul>
     <template #footer>
       <span class="dialog-footer">
-        <el-button type="primary"  @click="close">返 回</el-button>
+        <el-button type="primary" @click="close">返 回</el-button>
       </span>
     </template>
   </el-dialog>
@@ -48,7 +57,7 @@ const versionInfo = computed(() => versionLog);
 const close = () => {
   //关闭
   emits("update:versionVisible", false);
-}
+};
 </script>
 <style lang="scss" scoped>
 .v-log-content {
@@ -65,7 +74,7 @@ const close = () => {
 
     .v-n-date {
       font-size: 14px;
-      color: #A8ABB2;
+      color: #a8abb2;
     }
   }
 

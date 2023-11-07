@@ -1,12 +1,20 @@
 <template>
-  <el-pagination v-model:currentPage="pagination.page" v-model:page-size="pagination.pageSize" :background="!isMobile"
-    :page-sizes="[10, 20, 100, 200]" :layout="isMobile ? MobileLayout : DeskLayout" :total="pagination.total"
-    @size-change="sizeChange" @current-change="currentChange" class="pagination-location" />
+  <el-pagination
+    v-model:currentPage="pagination.page"
+    v-model:page-size="pagination.pageSize"
+    :background="!isMobile"
+    :page-sizes="[10, 20, 100, 200]"
+    :layout="isMobile ? MobileLayout : DeskLayout"
+    :total="pagination.total"
+    @size-change="sizeChange"
+    @current-change="currentChange"
+    class="pagination-location"
+  />
 </template>
 
 <script setup lang="ts" name="AdminPagination">
 import { PaginationState } from "@/types";
-import { useMobile } from '@/common/mobile';
+import { useMobile } from "@/common/mobile";
 import { useConfigStore } from "@/pinia/modules/config";
 import { useTagStore } from "@/pinia/modules/tag";
 const configStore = useConfigStore();
@@ -27,9 +35,9 @@ withDefaults(
   }
 );
 
-const DeskLayout = 'sizes,prev, pager, next, jumper,total';
+const DeskLayout = "sizes,prev, pager, next, jumper,total";
 
-const MobileLayout = 'prev, pager, next';
+const MobileLayout = "prev, pager, next";
 
 const emits = defineEmits<{
   (
@@ -46,12 +54,12 @@ const currentChange = (page: number) => {
   emits("change", {
     page,
   });
-}
+};
 
 const sizeChange = (pageSize: number) => {
   //切换展现条数 回到第一页
   emits("change", { pageSize, page: 1 });
-}
+};
 </script>
 <style lang="scss" scoped>
 .pagination-location {

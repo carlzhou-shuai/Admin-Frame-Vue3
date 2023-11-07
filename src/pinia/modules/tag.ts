@@ -14,7 +14,7 @@ export const useTagStore = defineStore({
     enabled: true, // 开启数据缓存
     strategies: [
       {
-        key:'tag_974813758',
+        key: "tag_974813758",
         storage: localStorage,
       },
     ],

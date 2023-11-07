@@ -34,7 +34,7 @@ const cn: any = {
       name: "Dashboard",
       children: {
         analysis: "数据分析",
-        workbench: "工作台"
+        workbench: "工作台",
       },
     },
     function: {
@@ -100,9 +100,9 @@ const cn: any = {
     i18n: {
       name: "国际化",
     },
-    other:{
-      name:"其他"
-    }
+    other: {
+      name: "其他",
+    },
   },
 };
 export default cn;

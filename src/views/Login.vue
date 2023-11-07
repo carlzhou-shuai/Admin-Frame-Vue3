@@ -6,19 +6,39 @@
         <p>{{ siteName }}</p>
         <span>{{ siteName }} 是一款中/后台管理系统</span>
       </div>
-      <el-form ref="loginFormRef" @toLogin.prevent :model="loginForm" :rules="loginRules" hide-required-asterisk>
+      <el-form
+        ref="loginFormRef"
+        @toLogin.prevent
+        :model="loginForm"
+        :rules="loginRules"
+        hide-required-asterisk
+      >
         <el-form-item prop="username">
-          <el-input size="default" v-model="loginForm.username" placeholder="请输入用户名">
+          <el-input
+            size="default"
+            v-model="loginForm.username"
+            placeholder="请输入用户名"
+          >
           </el-input>
         </el-form-item>
         <el-form-item prop="password">
-          <el-input size="default" v-model="loginForm.password" placeholder="请输入密码" show-password
-            @keyup.enter="toLogin(loginFormRef)">
+          <el-input
+            size="default"
+            v-model="loginForm.password"
+            placeholder="请输入密码"
+            show-password
+            @keyup.enter="toLogin(loginFormRef)"
+          >
           </el-input>
         </el-form-item>
         <el-form-item>
-          <el-button size="default" :loading="loading" style="width: 100%" type="primary"
-            @click="toLogin(loginFormRef)">登录
+          <el-button
+            size="default"
+            :loading="loading"
+            style="width: 100%"
+            type="primary"
+            @click="toLogin(loginFormRef)"
+            >登录
           </el-button>
         </el-form-item>
       </el-form>
@@ -26,7 +46,6 @@
         <el-button text disabled>其它登录方式</el-button>
         <el-button text disabled>忘记密码</el-button>
       </div>
-
     </div>
   </div>
 </template>
@@ -51,7 +70,7 @@ const loginForm = reactive({
 const loginRules = reactive({
   username: [{ required: true, message: "请输入用户名", trigger: "blur" }],
   password: [{ required: true, message: "请输入密码", trigger: "blur" }],
-})
+});
 
 const toLogin = async (formEl: FormInstance | undefined) => {
   //登陆
@@ -63,7 +82,10 @@ const toLogin = async (formEl: FormInstance | undefined) => {
       loading.value = true;
       proxy._public.debounce(() => {
         loading.value = false;
-        Cookies.set("token", 'LnN2QDE2NDE0NzcxO2NuLjo4ZloxV0VCbWF6MSt4ZWlBcEpWWUJocUozak1OYU1rRFhRNkxUZVRZdFJBPQ');
+        Cookies.set(
+          "token",
+          "LnN2QDE2NDE0NzcxO2NuLjo4ZloxV0VCbWF6MSt4ZWlBcEpWWUJocUozak1OYU1rRFhRNkxUZVRZdFJBPQ"
+        );
         userStore.$patch({
           user: {
             address: "安徽省 淮南市 大通区",
@@ -83,7 +105,6 @@ const toLogin = async (formEl: FormInstance | undefined) => {
     }
   });
 };
-
 </script>
 
 <style lang="scss" scoped>
@@ -121,6 +142,5 @@ const toLogin = async (formEl: FormInstance | undefined) => {
       justify-content: space-between;
     }
   }
-
 }
 </style>

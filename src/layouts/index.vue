@@ -1,10 +1,16 @@
 <template>
   <div class="main-wrapper mobile">
-    <div class="drawer-bg" v-if="isMobile && !collapse" @click="(() => {
-      tagStore.$patch({
-        collapse: true
-      })
-    })"></div>
+    <div
+      class="drawer-bg"
+      v-if="isMobile && !collapse"
+      @click="
+        () => {
+          tagStore.$patch({
+            collapse: true,
+          });
+        }
+      "
+    ></div>
     <el-container style="height: 100vh">
       <el-aside style="width: auto">
         <side-bar></side-bar>
@@ -15,12 +21,23 @@
         </el-header>
         <el-main>
           <Tags v-if="configStore.appConfig.showTabBar"></Tags>
-          <el-scrollbar id="screen-display" v-loading="!isReload" class="main-content" :style="{
-            height: configStore.appConfig.showTabBar ? 'calc(100vh - 120px)' : 'calc(100vh - 82px)'
-          }">
+          <el-scrollbar
+            id="screen-display"
+            v-loading="!isReload"
+            class="main-content"
+            :style="{
+              height: configStore.appConfig.showTabBar
+                ? 'calc(100vh - 120px)'
+                : 'calc(100vh - 82px)',
+            }"
+          >
             <router-view v-if="isReload" v-slot="{ Component, router }">
-              <Transition appear name="fade" appear-active-class="animate__animated animate__pulse"
-                enter-active-class="animate__animated animate__fadeIn">
+              <Transition
+                appear
+                name="fade"
+                appear-active-class="animate__animated animate__pulse"
+                enter-active-class="animate__animated animate__fadeIn"
+              >
                 <!--进入 enter-active-class   移出 leave-active-class  初始 appear-active-class-->
                 <KeepAlive :max="configStore.KeepAliveMaxLength">
                   <component :is="Component" />
@@ -39,7 +56,7 @@
 import SideBar from "@/layouts/components/SideBar/index.vue";
 import Header from "@/layouts/components/Header/index.vue";
 import Tags from "@/layouts/components/Tags/index.vue";
-import { nextTick, provide, ref, } from "vue";
+import { nextTick, provide, ref } from "vue";
 import { useConfigStore } from "@/pinia/modules/config";
 import { useTagStore } from "@/pinia/modules/tag";
 import { judgeEquipment } from "@/utils";
@@ -47,15 +64,15 @@ const configStore = useConfigStore();
 const isReload = ref<boolean>(true);
 const tagStore = useTagStore();
 const collapse = computed(() => tagStore.collapse); //打开关闭sidebar
-const isMobile = computed(() => judgeEquipment())//是否是手机登录
+const isMobile = computed(() => judgeEquipment()); //是否是手机登录
 const reload = () => {
   isReload.value = false;
   nextTick(() => {
     setTimeout(() => {
       isReload.value = true;
     }, 500);
-  })
-}
+  });
+};
 provide("reload", reload);
 </script>
 <style lang="scss" scoped>
@@ -88,7 +105,5 @@ provide("reload", reload);
     right: 8px !important;
     position: fixed;
   }
-
-
 }
 </style>

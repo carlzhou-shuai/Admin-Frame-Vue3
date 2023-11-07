@@ -17,5 +17,9 @@ export interface Tag extends RouteLocationNormalized {
 export interface ElConfig {
   locale: Language;
   language: string;
-  componentSize: BuildPropType<StringConstructor, "" | "small" | "large", unknown>;
+  componentSize: BuildPropType<
+    StringConstructor,
+    "" | "small" | "large",
+    unknown
+  >;
 }

@@ -25,7 +25,7 @@ export const useConfigStore = defineStore({
     enabled: true, // 开启数据缓存
     strategies: [
       {
-        key:'config_974813758',
+        key: "config_974813758",
         storage: localStorage,
       },
     ],

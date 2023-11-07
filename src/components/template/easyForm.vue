@@ -1,11 +1,9 @@
 <template>
- <el-card shadow="never" :body-style="{ padding: '30px' }">
-      <template #header>
-        <div class="card-header">
-          基础表单
-        </div>
-      </template>
-          <el-form
+  <el-card shadow="never" :body-style="{ padding: '30px' }">
+    <template #header>
+      <div class="card-header">基础表单</div>
+    </template>
+    <el-form
       ref="ruleFormRef"
       :model="ruleForm"
       :rules="rules"
@@ -73,7 +71,7 @@
         <el-button @click="resetForm(ruleFormRef)">重置</el-button>
       </el-form-item>
     </el-form>
-      </el-card>  
+  </el-card>
 </template>
 
 <script lang="ts" setup name="AdminEasyForm">
@@ -151,12 +149,12 @@ const submitForm = async (formEl: FormInstance | undefined) => {
       console.log("error submit!", fields);
     }
   });
-}
+};
 
 const resetForm = (formEl: FormInstance | undefined) => {
   if (!formEl) {
     return;
   }
   formEl.resetFields();
-}
+};
 </script>

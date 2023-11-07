@@ -1,26 +1,56 @@
 <template>
   <div class="cardList">
     <el-card shadow="never" :body-style="{ padding: '30px 10px 15px 10px' }">
-      <el-form :inline="true" :model="queryParams" class="demo-form-inline" label-position="right" label-width="84px">
+      <el-form
+        :inline="true"
+        :model="queryParams"
+        class="demo-form-inline"
+        label-position="right"
+        label-width="84px"
+      >
         <el-form-item>
-          <el-input v-model.trim="queryParams.name" clearable placeholder="请输入商品名称" @keyup.enter="getList"></el-input>
+          <el-input
+            v-model.trim="queryParams.name"
+            clearable
+            placeholder="请输入商品名称"
+            @keyup.enter="getList"
+          ></el-input>
         </el-form-item>
         <el-form-item>
-          <el-input v-model.trim="queryParams.id" clearable placeholder="请输入商品ID" @keyup.enter="getList"></el-input>
+          <el-input
+            v-model.trim="queryParams.id"
+            clearable
+            placeholder="请输入商品ID"
+            @keyup.enter="getList"
+          ></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" plain @click="getList">查 询</el-button>
-          <el-button type="primary" plain @click="handlePopup('add', {})">新增</el-button>
+          <el-button type="primary" plain @click="handlePopup('add', {})"
+            >新增</el-button
+          >
         </el-form-item>
       </el-form>
     </el-card>
     <div class="m-t8">
       <el-row :gutter="8">
-        <el-col v-for="(item, index) in list" :key="index" :xs="24" :sm="24" :md="12" :lg="12" :xl="6"
-          style="margin-top: 9px">
+        <el-col
+          v-for="(item, index) in list"
+          :key="index"
+          :xs="24"
+          :sm="24"
+          :md="12"
+          :lg="12"
+          :xl="6"
+          style="margin-top: 9px"
+        >
           <el-card :body-style="{ padding: '24px 0px 6px 0px' }">
             <div class="list-nav">
-              <el-image style="width: 130px; height: 120px" :src="item.image" fit="fill"></el-image>
+              <el-image
+                style="width: 130px; height: 120px"
+                :src="item.image"
+                fit="fill"
+              ></el-image>
               <div class="l-n-body">
                 <div class="l-n-b-title">{{ item.name }}</div>
                 <span class="l-n-b-introduce">{{ item.introduce }}</span>
@@ -30,8 +60,18 @@
               <div class="bottom">
                 <time class="time">上架日期：{{ item.putWayDate }}</time>
                 <el-space :size="10" spacer="|">
-                  <el-link type="primary" @click="handlePopup('edit', {})" :underline="false">编辑</el-link>
-                  <el-link type="primary" @click="removeDataById(item.id)" :underline="false">删除</el-link>
+                  <el-link
+                    type="primary"
+                    @click="handlePopup('edit', {})"
+                    :underline="false"
+                    >编辑</el-link
+                  >
+                  <el-link
+                    type="primary"
+                    @click="removeDataById(item.id)"
+                    :underline="false"
+                    >删除</el-link
+                  >
                 </el-space>
               </div>
             </div>
@@ -39,32 +79,62 @@
         </el-col>
       </el-row>
     </div>
-    <el-dialog v-model="isDialog" :title="dialogTitle" :before-close="
-      () => {
-        handleClose(tableFormRef);
-      }
-    " width="1000px" :close-on-click-modal="false" :close-on-press-escape="false" top="8vh">
-      <el-form hide-required-asterisk ref="tableFormRef" :model="form" :rules="rules" label-width="92px">
+    <el-dialog
+      v-model="isDialog"
+      :title="dialogTitle"
+      :before-close="
+        () => {
+          handleClose(tableFormRef);
+        }
+      "
+      width="1000px"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      top="8vh"
+    >
+      <el-form
+        hide-required-asterisk
+        ref="tableFormRef"
+        :model="form"
+        :rules="rules"
+        label-width="92px"
+      >
         <el-row>
           <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
             <el-form-item label="商品名称：" prop="name">
-              <el-input v-model="form.name" placeholder="请输入商品名称" clearable></el-input>
+              <el-input
+                v-model="form.name"
+                placeholder="请输入商品名称"
+                clearable
+              ></el-input>
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
             <el-form-item label="商品类型：" prop="height">
-              <el-input v-model="form.height" placeholder="请输入商品类型" clearable></el-input>
+              <el-input
+                v-model="form.height"
+                placeholder="请输入商品类型"
+                clearable
+              ></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="24">
             <el-form-item label="基本介绍：" prop="introduction">
-              <el-input v-model="form.introduction" type="textarea" :autosize="{ minRows: 2, maxRows: 5 }"
-                placeholder="请输入基本介绍"></el-input>
+              <el-input
+                v-model="form.introduction"
+                type="textarea"
+                :autosize="{ minRows: 2, maxRows: 5 }"
+                placeholder="请输入基本介绍"
+              ></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="24">
             <el-form-item label="备注：" prop="marks">
-              <el-input v-model="form.marks" type="textarea" :autosize="{ minRows: 3, maxRows: 5 }"></el-input>
+              <el-input
+                v-model="form.marks"
+                type="textarea"
+                :autosize="{ minRows: 3, maxRows: 5 }"
+              ></el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -72,7 +142,9 @@
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="handleClose(tableFormRef)">取 消</el-button>
-          <el-button type="primary" @click="onSubmit(tableFormRef)">确 定</el-button>
+          <el-button type="primary" @click="onSubmit(tableFormRef)"
+            >确 定</el-button
+          >
         </span>
       </template>
     </el-dialog>
@@ -174,8 +246,8 @@ const removeDataById = (id: string | number) => {
     cancelButtonText: "取消",
     type: "warning",
   })
-    .then(() => { })
-    .catch(() => { });
+    .then(() => {})
+    .catch(() => {});
 };
 
 const handleClose = (formEl: FormInstance | undefined) => {

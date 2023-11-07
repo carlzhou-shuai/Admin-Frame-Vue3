@@ -8,4 +8,3 @@ export function getInfo(data: any) {
     data,
   });
 }
-

@@ -1,8 +1,18 @@
 <template>
-  <el-drawer :before-close="close" :model-value="baseVisible" title="基本信息" @open="getInit">
+  <el-drawer
+    :before-close="close"
+    :model-value="baseVisible"
+    title="基本信息"
+    @open="getInit"
+  >
     <template #default>
-      <el-form label-width="92px" ref="baseInfoFormRef" hide-required-asterisk :model="state.baseInfoForm"
-        :rules="state.baseInfoRules">
+      <el-form
+        label-width="92px"
+        ref="baseInfoFormRef"
+        hide-required-asterisk
+        :model="state.baseInfoForm"
+        :rules="state.baseInfoRules"
+      >
         <el-row>
           <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
             <el-form-item label="姓名：">
@@ -14,14 +24,17 @@
               <el-input v-model="state.baseInfoForm.username"></el-input>
             </el-form-item>
           </el-col>
-          <el-col  :span="24" >
+          <el-col :span="24">
             <el-form-item label="手机号码：">
               <el-input v-model="state.baseInfoForm.phone"></el-input>
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
             <el-form-item label="性别：">
-              <el-select v-model="state.baseInfoForm.sex" placeholder="请选择性别">
+              <el-select
+                v-model="state.baseInfoForm.sex"
+                placeholder="请选择性别"
+              >
                 <el-option label="女" value="0"></el-option>
                 <el-option label="男" value="1"></el-option>
               </el-select>
@@ -29,12 +42,19 @@
           </el-col>
           <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
             <el-form-item label="出生日期：">
-              <el-date-picker v-model="state.baseInfoForm.birthDate" placeholder="选择日期" type="date"></el-date-picker>
+              <el-date-picker
+                v-model="state.baseInfoForm.birthDate"
+                placeholder="选择日期"
+                type="date"
+              ></el-date-picker>
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
             <el-form-item label="账号状态：">
-              <el-select v-model="state.baseInfoForm.userState" placeholder="请选择">
+              <el-select
+                v-model="state.baseInfoForm.userState"
+                placeholder="请选择"
+              >
                 <el-option label="正常" value="0"></el-option>
                 <el-option label="冻结" value="1"></el-option>
               </el-select>
@@ -42,8 +62,17 @@
           </el-col>
           <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
             <el-form-item label="权限分配：" prop="jurisdiction">
-              <el-select v-model="state.baseInfoForm.jurisdiction" multiple placeholder="请选择">
-                <el-option v-for="item in roleList" :key="item.roleId" :label="item.marks" :value="item.roleId">
+              <el-select
+                v-model="state.baseInfoForm.jurisdiction"
+                multiple
+                placeholder="请选择"
+              >
+                <el-option
+                  v-for="item in roleList"
+                  :key="item.roleId"
+                  :label="item.marks"
+                  :value="item.roleId"
+                >
                 </el-option>
               </el-select>
             </el-form-item>
@@ -55,7 +84,11 @@
           </el-col>
           <el-col :span="24">
             <el-form-item label="个人说明：">
-              <el-input v-model="state.baseInfoForm.marks" :autosize="{ minRows: 4, maxRows: 6 }" type="textarea">
+              <el-input
+                v-model="state.baseInfoForm.marks"
+                :autosize="{ minRows: 4, maxRows: 6 }"
+                type="textarea"
+              >
               </el-input>
             </el-form-item>
           </el-col>
@@ -143,17 +176,17 @@ const getInit = () => {
   state.baseInfoForm = Object.assign(state.baseInfoForm, {
     ...userStore.user,
   });
-}
+};
 const close = () => {
   emits("update:baseVisible", false);
-}
+};
 
 const openBaseInfo = <T extends Partial<BaseInfoState["baseInfoForm"]>>(
   row: T
 ) => {
   emits("update:baseVisible", true);
   state.baseInfoForm = Object.assign(state.baseInfoForm, { ...row });
-}
+};
 
 const saveBaseInfo = () => {
   //保存用户信息
@@ -167,7 +200,7 @@ const saveBaseInfo = () => {
     removeToken();
   }, 3000);
   close();
-}
+};
 
 defineExpose({
   openBaseInfo,

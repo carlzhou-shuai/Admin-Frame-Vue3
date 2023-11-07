@@ -5,4 +5,3 @@ export interface Message<T> {
   data: T;
   serverTime: Date;
 }
-

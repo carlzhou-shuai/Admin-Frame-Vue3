@@ -1,10 +1,8 @@
 <template>
   <el-card shadow="never" :body-style="{ padding: '30px' }">
-      <template #header>
-        <div class="card-header">
-          成功提示
-        </div>
-      </template>
+    <template #header>
+      <div class="card-header">成功提示</div>
+    </template>
     <el-result icon="success" title="提交成功">
       <template #extra>
         <div class="bg-default p-default min-w600">

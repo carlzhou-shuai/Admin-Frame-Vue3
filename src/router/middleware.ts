@@ -35,12 +35,12 @@ export function useMiddleware(router: Router) {
       to as RouteLocationNormalized,
       next as NavigationGuardNext
     ); //路由判断操作
-  })
+  });
 
   // 路由跳转后钩子函数中
   router.afterEach(async () => {
     await handleProgress("stop"); //停止进度条
-  })
+  });
 }
 
 export function addSiteTitle(name: string) {

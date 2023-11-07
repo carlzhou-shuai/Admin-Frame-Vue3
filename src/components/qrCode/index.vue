@@ -1,15 +1,15 @@
 <template>
-    <el-card class="box-card">
-      <template #header>
-        <div class="card-header">
-          <span>输入内容展示二维码</span>
-        </div>
-      </template>
-      <div class="text item">
-        <el-input v-model="text" placeholder="输入内容展示二维码" />
-        <img v-if="text" :src="qrCode" alt="QR Code" />
+  <el-card class="box-card">
+    <template #header>
+      <div class="card-header">
+        <span>输入内容展示二维码</span>
       </div>
-    </el-card>
+    </template>
+    <div class="text item">
+      <el-input v-model="text" placeholder="输入内容展示二维码" />
+      <img v-if="text" :src="qrCode" alt="QR Code" />
+    </div>
+  </el-card>
 </template>
 <script setup lang="ts" name="AdminQrCode">
 import { ref } from "vue";

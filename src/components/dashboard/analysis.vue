@@ -1,13 +1,21 @@
 <template>
   <div class="analysis">
     <el-row :gutter="8">
-      <el-col v-for="(item, index) in dataList" :key="index" :xs="12" :sm="12" :md="6" :lg="6" :xl="6">
+      <el-col
+        v-for="(item, index) in dataList"
+        :key="index"
+        :xs="12"
+        :sm="12"
+        :md="6"
+        :lg="6"
+        :xl="6"
+      >
         <el-card shadow="never" :body-style="{ padding: '35px 20px' }">
           <template #header>
             <div class="card-header">
               <span class="card-header-title">{{ item.title }}</span>
               <el-tag :type="item.type" effect="dark">{{
-                  item.labelTitle
+                item.labelTitle
               }}</el-tag>
             </div>
           </template>
@@ -111,26 +119,26 @@ const visitChart = ref<any>(null);
 const originChart = ref<any>(null);
 const activeChart = ref<any>(null);
 const statisticsChart = ref<any>(null);
-onMounted(() => chartsInit())
-onActivated(() => chartsInit())
-onUnmounted(() => chartsDispose())
-onDeactivated(() => chartsDispose())
+onMounted(() => chartsInit());
+onActivated(() => chartsInit());
+onUnmounted(() => chartsDispose());
+onDeactivated(() => chartsDispose());
 
 const chartsDispose = () => {
   if (originChart.value) {
-    originChart.value.dispose()
+    originChart.value.dispose();
   }
 
   if (visitChart.value) {
-    visitChart.value.dispose()
+    visitChart.value.dispose();
   }
   if (activeChart.value) {
-    activeChart.value.dispose()
+    activeChart.value.dispose();
   }
   if (statisticsChart.value) {
-    statisticsChart.value.dispose()
+    statisticsChart.value.dispose();
   }
-}
+};
 
 const chartsInit = () => {
   //图标初始化
@@ -138,7 +146,7 @@ const chartsInit = () => {
   loadOriginChart();
   loadActiveChart();
   loadGenderChart();
-}
+};
 const loadVisitChart = () => {
   //加载访问图表
   const labels = [];
@@ -150,7 +158,7 @@ const loadVisitChart = () => {
     } else {
       values.push(index * 26);
     }
-  };
+  }
 
   visitChart.value = eCharts.init(document.getElementById("visitChart"));
   const option = {
@@ -169,7 +177,7 @@ const loadVisitChart = () => {
     ],
   };
   visitChart.value.setOption(option);
-}
+};
 
 const loadOriginChart = () => {
   //加载访问图表
@@ -218,7 +226,7 @@ const loadOriginChart = () => {
     ],
   };
   originChart.value.setOption(option);
-}
+};
 
 const loadActiveChart = () => {
   //每周访问量
@@ -245,7 +253,7 @@ const loadActiveChart = () => {
   };
 
   activeChart.value.setOption(option);
-}
+};
 
 const loadGenderChart = () => {
   //用户性别统计
@@ -286,7 +294,7 @@ const loadGenderChart = () => {
     ],
   };
   statisticsChart.value.setOption(option);
-}
+};
 </script>
 <style lang="scss" scoped>
 .analysis {

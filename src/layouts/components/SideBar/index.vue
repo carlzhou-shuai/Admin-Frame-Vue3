@@ -1,51 +1,79 @@
 <template>
-  <div :style="{
-    width: collapse ? isMobile ? '0px' : '64px' : '200px',
-  }" class="sidebar-wrapper">
-     <el-scrollbar>
-    <div class="sidebar-info" v-if="configStore.appConfig.showLogo">
-      <img :src="getImage('LG', 'png')" />
-      <span v-if="!collapse">{{ siteName }}</span>
-    </div>
- 
-      <el-menu :default-active="onRoutes" :collapse="collapse" :collapse-transition="true" unique-opened router>
+  <div
+    :style="{
+      width: collapse ? (isMobile ? '0px' : '64px') : '200px',
+    }"
+    class="sidebar-wrapper"
+  >
+    <el-scrollbar>
+      <div class="sidebar-info" v-if="configStore.appConfig.showLogo">
+        <img :src="getImage('LG', 'png')" />
+        <span v-if="!collapse">{{ siteName }}</span>
+      </div>
+
+      <el-menu
+        :default-active="onRoutes"
+        :collapse="collapse"
+        :collapse-transition="true"
+        unique-opened
+        router
+      >
         <template v-for="item in menuItem">
           <template v-if="item?.children?.length">
             <el-sub-menu :key="item.resourceUrl" :index="item.resourceUrl">
               <template #title>
                 <i :class="item.resourceIcon"></i>
-                <span :class="
-                  item.resourceIcon
-                    ? 'menu-title'
-                    : 'menu-title menu-nullIcon'
-                ">{{ t(item.resourceName) }}</span>
+                <span
+                  :class="
+                    item.resourceIcon
+                      ? 'menu-title'
+                      : 'menu-title menu-nullIcon'
+                  "
+                  >{{ t(item.resourceName) }}</span
+                >
               </template>
               <template v-for="childItem in item.children">
-                <el-menu-item-group v-if="childItem?.children?.length" :key="childItem.resourceUrl"
-                  :index="childItem.resourceUrl">
+                <el-menu-item-group
+                  v-if="childItem?.children?.length"
+                  :key="childItem.resourceUrl"
+                  :index="childItem.resourceUrl"
+                >
                   <template #title>
                     <i :class="childItem.resourceIcon"></i>
-                    <span :class="
-                      childItem.resourceIcon
-                        ? 'menu-title'
-                        : 'menu-title menu-nullIcon'
-                    ">{{ t(childItem.resourceName) }}</span>
+                    <span
+                      :class="
+                        childItem.resourceIcon
+                          ? 'menu-title'
+                          : 'menu-title menu-nullIcon'
+                      "
+                      >{{ t(childItem.resourceName) }}</span
+                    >
                   </template>
-                  <el-menu-item v-for="(grandsonItem, i) in childItem.children" :key="i"
-                    :index="grandsonItem.resourceUrl">
+                  <el-menu-item
+                    v-for="(grandsonItem, i) in childItem.children"
+                    :key="i"
+                    :index="grandsonItem.resourceUrl"
+                  >
                     <span class="menu-title">{{
-                        t(grandsonItem.resourceName)
+                      t(grandsonItem.resourceName)
                     }}</span>
                   </el-menu-item>
                 </el-menu-item-group>
-                <el-menu-item v-else :key="childItem.resourceUrl + 'childItem'" :index="childItem.resourceUrl">
+                <el-menu-item
+                  v-else
+                  :key="childItem.resourceUrl + 'childItem'"
+                  :index="childItem.resourceUrl"
+                >
                   <template #title>
                     <i :class="childItem.resourceIcon"></i>
-                    <span :class="
-                      childItem.resourceIcon
-                        ? 'menu-title'
-                        : 'menu-title menu-nullIcon'
-                    ">{{ t(childItem.resourceName) }}</span>
+                    <span
+                      :class="
+                        childItem.resourceIcon
+                          ? 'menu-title'
+                          : 'menu-title menu-nullIcon'
+                      "
+                      >{{ t(childItem.resourceName) }}</span
+                    >
                   </template>
                 </el-menu-item>
               </template>
@@ -56,7 +84,7 @@
             <el-menu-item :key="item.resourceUrl" :index="item.resourceUrl">
               <i :class="item.resourceIcon"></i>
               <template #title class="menu-title">{{
-                  t(item.resourceName)
+                t(item.resourceName)
               }}</template>
             </el-menu-item>
           </template>
@@ -66,7 +94,7 @@
   </div>
 </template>
 <script lang="ts" setup name="AdminSidebar">
-import { getImage } from '@/utils';
+import { getImage } from "@/utils";
 import { computed } from "vue";
 import { useRoute } from "vue-router";
 import resourceList from "@/assets/js/resource";
@@ -74,9 +102,9 @@ import { useI18n } from "vue-i18n";
 import { useTagStore } from "@/pinia/modules/tag";
 import { ResourceItem } from "@/types/setting";
 import { useConfigStore } from "@/pinia/modules/config";
-import { siteName } from '@/router/middleware';
+import { siteName } from "@/router/middleware";
 import { judgeEquipment } from "@/utils";
-const isMobile = computed(() => judgeEquipment())//是否是手机登录
+const isMobile = computed(() => judgeEquipment()); //是否是手机登录
 const configStore = useConfigStore();
 const { t } = useI18n();
 const tagStore = useTagStore();
